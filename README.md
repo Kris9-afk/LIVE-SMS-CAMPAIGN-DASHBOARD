@@ -1,6 +1,8 @@
 # NAKRIS 02 Enterprises SMS Campaign Dashboard
 
-A live SMS campaign dashboard with a Vite/React frontend and a small Node.js HTTP backend.
+A live SMS campaign dashboard built with Vite, React, TypeScript, and Tailwind CSS.
+
+Live site: https://kris9-afk.github.io/LIVE-SMS-CAMPAIGN-DASHBOARD/
 
 ## Requirements
 
@@ -10,9 +12,9 @@ A live SMS campaign dashboard with a Vite/React frontend and a small Node.js HTT
 ## Project structure
 
 ```text
-frontend/   Vite, React, TypeScript, and Tailwind dashboard
-backend/    Node.js API service
-README.md   Project instructions
+frontend/                    Vite, React, TypeScript, and Tailwind dashboard
+.github/workflows/           GitHub Pages deployment workflow
+README.md                    Project instructions
 ```
 
 ## Install dependencies
@@ -24,21 +26,7 @@ cd frontend
 npm install
 ```
 
-The backend uses only Node.js built-ins, so it does not need a separate install.
-
 ## Run locally
-
-Open two terminals from the project root.
-
-### Terminal 1: backend
-
-```bash
-node backend/server.js
-```
-
-The API runs at `http://localhost:4000`.
-
-### Terminal 2: frontend
 
 ```bash
 cd frontend
@@ -47,23 +35,9 @@ npm run dev
 
 Open the Vite URL shown in the terminal, normally `http://localhost:5173`.
 
-## API endpoints
+## Build and verify
 
-| Method | Endpoint        | Purpose                           |
-| ------ | --------------- | --------------------------------- |
-| `GET`  | `/api/health`   | Check that the backend is running |
-| `GET`  | `/api/messages` | Return sample campaign messages   |
-
-Example checks from PowerShell:
-
-```powershell
-Invoke-RestMethod http://localhost:4000/api/health
-Invoke-RestMethod http://localhost:4000/api/messages
-```
-
-## Test and verify
-
-The frontend currently uses linting and a production build as its automated checks:
+Run the checks from `frontend`:
 
 ```bash
 cd frontend
@@ -78,4 +52,8 @@ cd frontend
 npm run preview
 ```
 
-There is no dedicated unit-test suite configured yet.
+## Deployment
+
+Every push to `main` runs `.github/workflows/deploy-pages.yml`. The workflow installs the frontend dependencies, builds `frontend/dist`, and deploys the result to GitHub Pages.
+
+The Vite base path is configured automatically for the repository URL during GitHub Actions builds.
