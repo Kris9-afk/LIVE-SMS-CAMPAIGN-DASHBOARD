@@ -28,6 +28,9 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         working-directory: frontend
         run: npm ci
@@ -35,6 +38,13 @@ jobs:
       - name: Build frontend
         working-directory: frontend
         run: npm run build
+
+      - name: Verify publish assets
+        working-directory: frontend
+        run: |
+          test -s dist/index.html
+          test -n "$(find dist/assets -type f -name '*.css' -size +0c -print -quit)"
+          test -n "$(find dist/assets -type f -name '*.js' -size +0c -print -quit)"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
